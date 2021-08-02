@@ -1,7 +1,11 @@
 'use strict';
 
-let hourShifter = 0;
+let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 let salesProjections = document.getElementById('salesProjections');
+
+function randomNumber(min, max) {
+  return(Math.floor(Math.random() * (max - min + 1) + min));
+}
 
 //Seattle's object:
 
@@ -10,30 +14,16 @@ const SeattleSales = {
   minNumOfCustomers: 23, //per hour
   maxNumOfCustomers: 65, //per hour
   avgNumOfCookies: 6.3, //Per customer
-  noOfCustomers: [], //random generated number of customers per hour - from 06:00 (6am) to 19:00 (7pm)
   noOfCookies: [], //total number of cookies per hour
   totalNumOfCookies: 0,
-  hour: [],
 
-  calculationsForSales: function(min, max) {
-    for(let i=0; i<14; i++) {
-      this.noOfCustomers[i] =Math.floor(Math.random() * (max - min + 1) + min); //to generate a random number of customers per hour
-      this.noOfCookies[i] = Math.ceil((this.noOfCustomers[i]) * (this.avgNumOfCookies)); //to find the total number of cookies per hour
-      this.totalNumOfCookies+=this.noOfCookies[i];
-      if(i<6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} am: `;
-      }
-      else if (i===6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
-      else {
-        hourShifter = i-6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
+  calculationsForSales: function() {
+    for(let i=0; i<hours.length; i++) {
+      let randomGen = Math.ceil(randomNumber(this.minNumOfCustomers, this.maxNumOfCustomers) * this.avgNumOfCookies);
+      this.noOfCookies.push(randomGen);
+      this.totalNumOfCookies += randomGen;
     }
-    return this.noOfCustomers, this.noOfCookies, this.totalNumOfCookies, this.hour;
+    return this.noOfCookies, this.totalNumOfCookies;
   },
 
   rendering: function() {
@@ -48,14 +38,14 @@ const SeattleSales = {
     let ulElement = document.createElement('ul');
     articleElement.appendChild(ulElement);
     //Creating and adding list items
-    for(let j = 0; j<this.noOfCookies.length; j++) {
+    for(let j = 0; j<hours.length; j++) {
       let liElement = document.createElement('li');
-      liElement.textContent = this.hour[j] + this.noOfCookies[j] + ' cookies';
+      liElement.textContent = `${hours[j]}: ${this.noOfCookies[j]} cookies`;
       ulElement.appendChild(liElement);
     }
     //Creating and adding the total
     let liElement = document.createElement('li');
-    liElement.textContent = 'Total: ' + this.totalNumOfCookies + ' cookies';
+    liElement.textContent = `Total: ${this.totalNumOfCookies} cookies`;
     ulElement.appendChild(liElement);
   },
 };
@@ -67,30 +57,16 @@ const TokyoSales = {
   minNumOfCustomers: 3, //per hour
   maxNumOfCustomers: 24, //per hour
   avgNumOfCookies: 1.2, //Per customer
-  noOfCustomers: [], //random generated number of customers per hour - from 06:00 (6am) to 19:00 (7pm)
   noOfCookies: [], //total number of cookies per hour
   totalNumOfCookies: 0,
-  hour: [],
 
-  calculationsForSales: function(min, max) {
-    for(let i=0; i<14; i++) {
-      this.noOfCustomers[i] =Math.floor(Math.random() * (max - min + 1) + min); //to generate a random number of customers per hour
-      this.noOfCookies[i] = Math.ceil((this.noOfCustomers[i]) * (this.avgNumOfCookies)); //to find the total number of cookies per hour
-      this.totalNumOfCookies+=this.noOfCookies[i];
-      if(i<6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} am: `;
-      }
-      else if (i===6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
-      else {
-        hourShifter = i-6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
+  calculationsForSales: function() {
+    for(let i=0; i<hours.length; i++) {
+      let randomGen = Math.ceil(randomNumber(this.minNumOfCustomers, this.maxNumOfCustomers) * this.avgNumOfCookies);
+      this.noOfCookies.push(randomGen);
+      this.totalNumOfCookies += randomGen;
     }
-    return this.noOfCustomers, this.noOfCookies, this.totalNumOfCookies, this.hour;
+    return this.noOfCookies, this.totalNumOfCookies;
   },
 
   rendering: function() {
@@ -105,14 +81,14 @@ const TokyoSales = {
     let ulElement = document.createElement('ul');
     articleElement.appendChild(ulElement);
     //Creating and adding list items
-    for(let j = 0; j<this.noOfCookies.length; j++) {
+    for(let j = 0; j<hours.length; j++) {
       let liElement = document.createElement('li');
-      liElement.textContent = this.hour[j] + this.noOfCookies[j] + ' cookies';
+      liElement.textContent = `${hours[j]}: ${this.noOfCookies[j]} cookies`;
       ulElement.appendChild(liElement);
     }
     //Creating and adding the total
     let liElement = document.createElement('li');
-    liElement.textContent = 'Total: ' + this.totalNumOfCookies + ' cookies';
+    liElement.textContent = `Total: ${this.totalNumOfCookies} cookies`;
     ulElement.appendChild(liElement);
   },
 };
@@ -124,30 +100,16 @@ const DubaiSales = {
   minNumOfCustomers: 11, //per hour
   maxNumOfCustomers: 38, //per hour
   avgNumOfCookies: 3.7, //Per customer
-  noOfCustomers: [], //random generated number of customers per hour - from 06:00 (6am) to 19:00 (7pm)
   noOfCookies: [], //total number of cookies per hour
   totalNumOfCookies: 0,
-  hour: [],
 
-  calculationsForSales: function(min, max) {
-    for(let i=0; i<14; i++) {
-      this.noOfCustomers[i] =Math.floor(Math.random() * (max - min + 1) + min); //to generate a random number of customers per hour
-      this.noOfCookies[i] = Math.ceil((this.noOfCustomers[i]) * (this.avgNumOfCookies)); //to find the total number of cookies per hour
-      this.totalNumOfCookies+=this.noOfCookies[i];
-      if(i<6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} am: `;
-      }
-      else if (i===6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
-      else {
-        hourShifter = i-6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
+  calculationsForSales: function() {
+    for(let i=0; i<hours.length; i++) {
+      let randomGen = Math.ceil(randomNumber(this.minNumOfCustomers, this.maxNumOfCustomers) * this.avgNumOfCookies);
+      this.noOfCookies.push(randomGen);
+      this.totalNumOfCookies += randomGen;
     }
-    return this.noOfCustomers, this.noOfCookies, this.totalNumOfCookies, this.hour;
+    return this.noOfCookies, this.totalNumOfCookies;
   },
 
   rendering: function() {
@@ -162,14 +124,14 @@ const DubaiSales = {
     let ulElement = document.createElement('ul');
     articleElement.appendChild(ulElement);
     //Creating and adding list items
-    for(let j = 0; j<this.noOfCookies.length; j++) {
+    for(let j = 0; j<hours.length; j++) {
       let liElement = document.createElement('li');
-      liElement.textContent = this.hour[j] + this.noOfCookies[j] + ' cookies';
+      liElement.textContent = `${hours[j]}: ${this.noOfCookies[j]} cookies`;
       ulElement.appendChild(liElement);
     }
     //Creating and adding the total
     let liElement = document.createElement('li');
-    liElement.textContent = 'Total: ' + this.totalNumOfCookies + ' cookies';
+    liElement.textContent = `Total: ${this.totalNumOfCookies} cookies`;
     ulElement.appendChild(liElement);
   },
 };
@@ -181,30 +143,16 @@ const ParisSales = {
   minNumOfCustomers: 20, //per hour
   maxNumOfCustomers: 38, //per hour
   avgNumOfCookies: 2.3, //Per customer
-  noOfCustomers: [], //random generated number of customers per hour - from 06:00 (6am) to 19:00 (7pm)
   noOfCookies: [], //total number of cookies per hour
   totalNumOfCookies: 0,
-  hour: [],
 
-  calculationsForSales: function(min, max) {
-    for(let i=0; i<14; i++) {
-      this.noOfCustomers[i] =Math.floor(Math.random() * (max - min + 1) + min); //to generate a random number of customers per hour
-      this.noOfCookies[i] = Math.ceil((this.noOfCustomers[i]) * (this.avgNumOfCookies)); //to find the total number of cookies per hour
-      this.totalNumOfCookies+=this.noOfCookies[i];
-      if(i<6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} am: `;
-      }
-      else if (i===6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
-      else {
-        hourShifter = i-6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
+  calculationsForSales: function() {
+    for(let i=0; i<hours.length; i++) {
+      let randomGen = Math.ceil(randomNumber(this.minNumOfCustomers, this.maxNumOfCustomers) * this.avgNumOfCookies);
+      this.noOfCookies.push(randomGen);
+      this.totalNumOfCookies += randomGen;
     }
-    return this.noOfCustomers, this.noOfCookies, this.totalNumOfCookies, this.hour;
+    return this.noOfCookies, this.totalNumOfCookies;
   },
 
   rendering: function() {
@@ -219,14 +167,14 @@ const ParisSales = {
     let ulElement = document.createElement('ul');
     articleElement.appendChild(ulElement);
     //Creating and adding list items
-    for(let j = 0; j<this.noOfCookies.length; j++) {
+    for(let j = 0; j<hours.length; j++) {
       let liElement = document.createElement('li');
-      liElement.textContent = this.hour[j] + this.noOfCookies[j] + ' cookies';
+      liElement.textContent = `${hours[j]}: ${this.noOfCookies[j]} cookies`;
       ulElement.appendChild(liElement);
     }
     //Creating and adding the total
     let liElement = document.createElement('li');
-    liElement.textContent = 'Total: ' + this.totalNumOfCookies + ' cookies';
+    liElement.textContent = `Total: ${this.totalNumOfCookies} cookies`;
     ulElement.appendChild(liElement);
   },
 };
@@ -238,30 +186,16 @@ const LimaSales = {
   minNumOfCustomers: 2, //per hour
   maxNumOfCustomers: 16, //per hour
   avgNumOfCookies: 4.6, //Per customer
-  noOfCustomers: [], //random generated number of customers per hour - from 06:00 (6am) to 19:00 (7pm)
   noOfCookies: [], //total number of cookies per hour
   totalNumOfCookies: 0,
-  hour: [],
 
-  calculationsForSales: function(min, max) {
-    for(let i=0; i<14; i++) {
-      this.noOfCustomers[i] =Math.floor(Math.random() * (max - min + 1) + min); //to generate a random number of customers per hour
-      this.noOfCookies[i] = Math.ceil((this.noOfCustomers[i]) * (this.avgNumOfCookies)); //to find the total number of cookies per hour
-      this.totalNumOfCookies+=this.noOfCookies[i];
-      if(i<6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} am: `;
-      }
-      else if (i===6) {
-        hourShifter = i+6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
-      else {
-        hourShifter = i-6;
-        this.hour[i] = `${hourShifter} pm: `;
-      }
+  calculationsForSales: function() {
+    for(let i=0; i<hours.length; i++) {
+      let randomGen = Math.ceil(randomNumber(this.minNumOfCustomers, this.maxNumOfCustomers) * this.avgNumOfCookies);
+      this.noOfCookies.push(randomGen);
+      this.totalNumOfCookies += randomGen;
     }
-    return this.noOfCustomers, this.noOfCookies, this.totalNumOfCookies, this.hour;
+    return this.noOfCookies, this.totalNumOfCookies;
   },
 
   rendering: function() {
@@ -276,35 +210,30 @@ const LimaSales = {
     let ulElement = document.createElement('ul');
     articleElement.appendChild(ulElement);
     //Creating and adding list items
-    for(let j = 0; j<this.noOfCookies.length; j++) {
+    for(let j = 0; j<hours.length; j++) {
       let liElement = document.createElement('li');
-      liElement.textContent = this.hour[j] + this.noOfCookies[j] + ' cookies';
+      liElement.textContent = `${hours[j]}: ${this.noOfCookies[j]} cookies`;
       ulElement.appendChild(liElement);
     }
     //Creating and adding the total
     let liElement = document.createElement('li');
-    liElement.textContent = 'Total: ' + this.totalNumOfCookies + ' cookies';
+    liElement.textContent = `Total: ${this.totalNumOfCookies} cookies`;
     ulElement.appendChild(liElement);
   },
 };
 
 //Calling functions for each location:
-SeattleSales.calculationsForSales(SeattleSales.minNumOfCustomers, SeattleSales.maxNumOfCustomers);
-console.log(SeattleSales);
+SeattleSales.calculationsForSales();
 SeattleSales.rendering();
 
-TokyoSales.calculationsForSales(TokyoSales.minNumOfCustomers, TokyoSales.maxNumOfCustomers);
-console.log(TokyoSales);
+TokyoSales.calculationsForSales();
 TokyoSales.rendering();
 
-DubaiSales.calculationsForSales(DubaiSales.minNumOfCustomers, DubaiSales.maxNumOfCustomers);
-console.log(DubaiSales);
+DubaiSales.calculationsForSales();
 DubaiSales.rendering();
 
-ParisSales.calculationsForSales(ParisSales.minNumOfCustomers, ParisSales.maxNumOfCustomers);
-console.log(ParisSales);
+ParisSales.calculationsForSales();
 ParisSales.rendering();
 
-LimaSales.calculationsForSales(LimaSales.minNumOfCustomers, LimaSales.maxNumOfCustomers);
-console.log(LimaSales);
+LimaSales.calculationsForSales();
 LimaSales.rendering();
