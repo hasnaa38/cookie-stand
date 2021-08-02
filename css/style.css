@@ -38,14 +38,17 @@ li {
     list-style-type: none;
 }
 
-td, th {
+#table1 td, th {
     padding: 10px;
     text-align: center;
     border: 1px dotted #264143;
 }
 
-/* table tr {
-    padding: 10px;
+#table2 td, th {
     text-align: center;
     border: 1px dotted #264143;
-} */
+}
+
+footer {
+    height: 70px;
+}
