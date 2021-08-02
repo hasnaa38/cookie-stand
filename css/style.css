@@ -37,3 +37,15 @@ h3 {
 li {
     list-style-type: none;
 }
+
+td, th {
+    padding: 10px;
+    text-align: center;
+    border: 1px dotted #264143;
+}
+
+/* table tr {
+    padding: 10px;
+    text-align: center;
+    border: 1px dotted #264143;
+} */
