@@ -113,9 +113,20 @@ h3 {
 
 /* for sales.html */
 
+#salesHead {
+    background-color: white;
+    height: 100px;
+    border-bottom: 1px solid #3C4F65;
+}
+
+#salesHead h1 {
+    margin-left: 10px;
+}
+
 p.salesData {
     font-size: medium;
     margin-top: 60px;
+    margin-bottom: 10px;
 }
 
 #table1 td, th {
