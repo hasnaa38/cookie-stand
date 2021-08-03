@@ -1,47 +1,127 @@
 body {
-    background-color: #f2ebe9;
-    color: #0d0d0d;
+    background-color: #F7F7E8;
+    color: #33313B;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body header {
-    color: #0d0d0d;
-   text-align: center;
+#firstLine {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 10px 10px 20px 0px;
+}
+
+nav {
+    margin-left: 880px;
+    margin-top: 5px;
 }
 
 nav a {
-    background-color: #264143;
-    border-radius: 25px; /* for rounded corners */
-    padding: 8px;
+    padding: 6px;
     text-decoration: none;
-    color: #f2ebe9;
+    color: #33313B;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 17px;
+    transition: 200ms;
 }
 
-img {
-    margin-bottom: 40px;
+a:hover {
+    color:#C7CFB7;
+    background-color: #33313B;
+    border-radius: 25px;
+
+}
+
+#secondLine {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: white;
+    height: 290px;
+    font-size: xx-large;
+}
+
+#secondLine img {
+    margin-left: 480px;
+    margin-top: 17px;
+}
+
+#secondLine h1 {
+    text-align: center;
+    margin: 70px 0px 0px 40px;
+}
+
+h2 {
+    margin-top: 80px;
+    margin-left: 10px;
 }
 
 p {
-    font-size: medium;
-    margin-top: 60px;
+    text-align: justify;
+    font-size: 18px;
+    margin: 25px 0px 0px 25px;
 }
 
-article {
-    margin-top: 40px;
+#menu {
+    display: grid;
+    grid-template-columns: auto auto;
+    text-align: center;
+    margin-top: 20px;
 }
+
+#location, #charity {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 20px;
+} 
+
+#charity p {
+    width: 890px;
+}
+
+
 
 h3 {
-    background-color: rgba(38,65,67,0.2);
+    text-align: justify;
+    font-size: 18px;
+    margin: 25px 0px 0px 25px;
+    color: #834C69;
 }
 
-li {
-    list-style-type: none;
+
+#contest {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 23px;
+    gap: 160px;
+}
+
+#contest img {
+    max-width: auto;
+    max-height: 175px;
+}
+
+#homeFooter {
+    background-color: white;
+    margin-top: 70px;
+}
+
+#homeFooter p {
+    text-align: center;
+    position: relative;
+    top: 40px;
+}
+
+/* for sales.html */
+
+p.salesData {
+    font-size: medium;
+    margin-top: 60px;
 }
 
 #table1 td, th {
     padding: 10px;
     text-align: center;
-    border: 1px dotted #264143;
+    border: 1px dotted #33313B;
 }
 
 #table2 td, th {
