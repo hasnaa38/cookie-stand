@@ -7,34 +7,6 @@ function randomNumber(min, max) {
   return(Math.floor(Math.random() * (max - min + 1) + min));
 }
 
-//...(General rendering)...
-let salesProjections = document.getElementById('salesProjections');
-let tableElement = document.createElement('table');
-tableElement.setAttribute('id','table1');
-salesProjections.appendChild(tableElement);
-
-
-//...(Rendering the first table -- the first row)...
-function firstRow (tableEl) {
-  let trElement = document.createElement('tr');
-  tableEl.appendChild(trElement);
-  let header1El = document.createElement('th');
-  header1El.textContent = 'Location';
-  trElement.appendChild(header1El);
-  for (let m = 0; m < hours.length; m++) {
-    let headerEl = document.createElement('th');
-    headerEl.textContent = hours[m];
-    trElement.appendChild(headerEl);
-  }
-  if(tableEl === tableElement) {
-    let header2El = document.createElement('th');
-    header2El.textContent = 'Total/day';
-    trElement.appendChild(header2El);
-  }
-}
-
-firstRow(tableElement);
-
 // Object constructor function:
 function SalesConstructor (shopLocation, minNumOfCustomers, maxNumOfCustomers, avgNumOfCookies) {
   this.shopLocation = shopLocation;
@@ -90,19 +62,8 @@ SalesConstructor.prototype.staffManagement = function() {
       this.noOfTossers.push(4);
     }
   }
-  console.log(this.noOfCustomers);
-  console.log(this.noOfTossers);
   return this.noOfTossers;
 };
-
-//...(Rendering the second table -- the first row)...
-let pForTable2El = document.createElement('p');
-pForTable2El.textContent = 'Below, you will find the staff management table for each of our store locations.';
-salesProjections.appendChild(pForTable2El);
-let table2Element = document.createElement('table');
-salesProjections.appendChild(table2Element);
-table2Element.setAttribute('id','table2');
-firstRow(table2Element);
 
 SalesConstructor.prototype.staffManagementRendering = function () {
   let trElement = document.createElement('tr');
@@ -125,43 +86,74 @@ let dubaiSales = new SalesConstructor('Dubai', 11, 38, 3.7);
 let parisSales = new SalesConstructor('Paris', 20, 38, 2.3);
 let limaSales = new SalesConstructor('Lima', 2, 16, 4.6);
 
-console.log(seattleSales);
+//...(General rendering)...
+let salesProjections = document.getElementById('salesProjections');
+let tableElement = document.createElement('table');
+tableElement.setAttribute('id','table1');
+salesProjections.appendChild(tableElement);
+
+//...(Rendering the first table -- the first row)...
+function firstRow (tableEl) {
+  let trElement = document.createElement('tr');
+  tableEl.appendChild(trElement);
+  let header1El = document.createElement('th');
+  header1El.textContent = 'Location';
+  trElement.appendChild(header1El);
+  for (let m = 0; m < hours.length; m++) {
+    let headerEl = document.createElement('th');
+    headerEl.textContent = hours[m];
+    trElement.appendChild(headerEl);
+  }
+  if(tableEl === tableElement) {
+    let header2El = document.createElement('th');
+    header2El.textContent = 'Total/day';
+    trElement.appendChild(header2El);
+  }
+}
+firstRow(tableElement);
+
+//...(Rendering the second table -- the first row)...
+let pForTable2El = document.createElement('p');
+pForTable2El.textContent = 'Below, you will find the staff management table for each of our store locations.';
+salesProjections.appendChild(pForTable2El);
+let table2Element = document.createElement('table');
+salesProjections.appendChild(table2Element);
+table2Element.setAttribute('id','table2');
+firstRow(table2Element);
 
 //Calling the functions:
 
 let storeLocation = [seattleSales, tokyoSales, dubaiSales, parisSales, limaSales];
+let inter2 = 0;
 for (let i = 0; i < storeLocation.length; i++) {
   storeLocation[i].salesData();
   storeLocation[i].render();
   storeLocation[i].staffManagement();
   storeLocation[i].staffManagementRendering();
+  inter2 += storeLocation[i].totalNumOfCookies;
 }
 
-//...(Rendering the last table row)...
+//...(Rendering table 1 - the footer row)...
 
 function totalPerHour () {
   let trElement = document.createElement('tr');
   tableElement.appendChild(trElement);
-  let footer1El = document.createElement('th');
-  footer1El.textContent = 'Total/hr';
-  trElement.appendChild(footer1El);
-  let hourlyTotal = []; 
+
+  let totals = ['Total/hr'];
   let inter = 0;
-  for (let m = 0; m < hours.length; m++) {
-    for (let i = 0; i < storeLocation.length; i++) {
-      inter += storeLocation[i].noOfCookies[m];
+  for (let i=0; i<hours.length; i++) {
+    for (let j=0; j<storeLocation.length; j++) {
+      inter += storeLocation[j].noOfCookies[i];
     }
-    hourlyTotal[m] = inter;
+    totals.push(inter);
     inter = 0;
-    let footer2El = document.createElement('th');
-    footer2El.textContent = hourlyTotal[m];
-    trElement.appendChild(footer2El);
+  }
+
+  totals.push(inter2);
+  for(let m=0; m<totals.length; m++){
+    let footerEl = document.createElement('th');
+    footerEl.textContent = totals[m];
+    trElement.appendChild(footerEl);
   }
 }
 totalPerHour();
-
-//For the
-
-//I need hours, no of customers per hour
-//If no of customers<40 ==> 2 cookie tossers
-//If 40<customers<60: 3 and more 4 (since max is 65)
