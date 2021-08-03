@@ -114,6 +114,7 @@ firstRow(tableElement);
 
 //...(Rendering the second table -- the first row)...
 let pForTable2El = document.createElement('p');
+pForTable2El.setAttribute('class','salesData');
 pForTable2El.textContent = 'Below, you will find the staff management table for each of our store locations.';
 salesProjections.appendChild(pForTable2El);
 let table2Element = document.createElement('table');
