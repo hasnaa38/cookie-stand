@@ -7,6 +7,9 @@ function randomNumber(min, max) {
   return(Math.floor(Math.random() * (max - min + 1) + min));
 }
 
+let addLocation = document.getElementById('addLocation');
+console.log(addLocation);
+
 //Creating table elements and generating each table's first row:
 let salesProjections = document.getElementById('salesProjections');
 let tableElement = document.createElement('table');
@@ -99,9 +102,7 @@ let dubaiSales = new SalesConstructor('Dubai', 11, 38, 3.7);
 let parisSales = new SalesConstructor('Paris', 20, 38, 2.3);
 let limaSales = new SalesConstructor('Lima', 2, 16, 4.6);
 
-
 //Calling the functions:
-
 let storeLocation = [seattleSales, tokyoSales, dubaiSales, parisSales, limaSales];
 let inter2 = 0;
 for (let i = 0; i < storeLocation.length; i++) {
@@ -156,7 +157,31 @@ function totalPerHour () {
 }
 totalPerHour();
 
+//Event:
+addLocation.addEventListener('submit', submitListener);
+function submitListener(event) {
+  event.preventDefault();
+  let newLoc = event.target.newLoc.value;
+  let minC = event.target.minC.value;
+  let maxC = event.target.maxC.value;
+  let avgC = event.target.avgC.value;
 
+  let newLocation = new SalesConstructor(newLoc, minC, maxC, avgC);
+  
+  removeFooter (); //To remove the last row (totals)
+  storeLocation.push(newLocation); //To add the new values to the totals
+  
+  newLocation.salesData();
+  newLocation.render();
+  newLocation.staffManagement();
+  newLocation.staffManagementRendering();
 
-//Inputs: shopLocation, minNumOfCustomers, maxNumOfCustomers, avgNumOfCookies
+  inter2 += newLocation.totalNumOfCookies; //To update the value of the total of totals
+  totalPerHour(); //To generate the totals row again
+  addLocation.reset();
+}
 
+//Removing the last row from table 1 function:
+function removeFooter () {
+  document.getElementById('table1').deleteRow(-1);
+}

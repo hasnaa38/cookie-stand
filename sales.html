@@ -19,8 +19,30 @@
         </nav>
     </header>
     <main>
-        <p class="salesData">Below, you will find the daily sales projections for each of our locations.</p>
+        <p class='salesData'>Below, you will find the daily sales projections for each of our locations.</p>
+
+    <section>
         <div id='salesProjections'></div>
+
+
+        <fieldset>
+            <legend>Add a new location</legend>
+            <form id='addLocation'>
+                <lable for="newLoc">Location</lable>
+                <input type="text" name="" id="newLoc">
+                <lable class="minC">Min number of customers/hr</lable>
+                <input type="text" name="" id="minC">
+                <lable class="maxC">Max number of customers/hr</lable>
+                <input type="text" name="" id="maxC">
+                <lable class="avgC">Avg number of cookies/customer</lable>
+                <input type="text" name="" id="avgC">
+                <input type="submit" value="submit">
+            </form>
+        </fieldset>
+
+
+    </section>
+    
         <p class='staffManagement'>Below, you will find the staff management table for each of our locations.</p>
         <div id='staffManagementTable'></div>
     </main>
