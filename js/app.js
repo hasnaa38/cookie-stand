@@ -7,6 +7,19 @@ function randomNumber(min, max) {
   return(Math.floor(Math.random() * (max - min + 1) + min));
 }
 
+//Creating table elements and generating each table's first row:
+let salesProjections = document.getElementById('salesProjections');
+let tableElement = document.createElement('table');
+tableElement.setAttribute('id','table1');
+salesProjections.appendChild(tableElement);
+firstRow(tableElement);
+let staffManagementTable = document.getElementById('staffManagementTable');
+let table2Element = document.createElement('table');
+table2Element.setAttribute('id','table2');
+staffManagementTable.appendChild(table2Element);
+firstRow(table2Element);
+
+
 // Object constructor function:
 function SalesConstructor (shopLocation, minNumOfCustomers, maxNumOfCustomers, avgNumOfCookies) {
   this.shopLocation = shopLocation;
@@ -86,13 +99,20 @@ let dubaiSales = new SalesConstructor('Dubai', 11, 38, 3.7);
 let parisSales = new SalesConstructor('Paris', 20, 38, 2.3);
 let limaSales = new SalesConstructor('Lima', 2, 16, 4.6);
 
-//...(General rendering)...
-let salesProjections = document.getElementById('salesProjections');
-let tableElement = document.createElement('table');
-tableElement.setAttribute('id','table1');
-salesProjections.appendChild(tableElement);
 
-//...(Rendering the first table -- the first row)...
+//Calling the functions:
+
+let storeLocation = [seattleSales, tokyoSales, dubaiSales, parisSales, limaSales];
+let inter2 = 0;
+for (let i = 0; i < storeLocation.length; i++) {
+  storeLocation[i].salesData();
+  storeLocation[i].render();
+  storeLocation[i].staffManagement();
+  storeLocation[i].staffManagementRendering();
+  inter2 += storeLocation[i].totalNumOfCookies;
+}
+
+//...(Rendering the first row for each table)...
 function firstRow (tableEl) {
   let trElement = document.createElement('tr');
   tableEl.appendChild(trElement);
@@ -109,29 +129,6 @@ function firstRow (tableEl) {
     header2El.textContent = 'Total/day';
     trElement.appendChild(header2El);
   }
-}
-firstRow(tableElement);
-
-//...(Rendering the second table -- the first row)...
-let pForTable2El = document.createElement('p');
-pForTable2El.setAttribute('class','salesData');
-pForTable2El.textContent = 'Below, you will find the staff management table for each of our store locations.';
-salesProjections.appendChild(pForTable2El);
-let table2Element = document.createElement('table');
-salesProjections.appendChild(table2Element);
-table2Element.setAttribute('id','table2');
-firstRow(table2Element);
-
-//Calling the functions:
-
-let storeLocation = [seattleSales, tokyoSales, dubaiSales, parisSales, limaSales];
-let inter2 = 0;
-for (let i = 0; i < storeLocation.length; i++) {
-  storeLocation[i].salesData();
-  storeLocation[i].render();
-  storeLocation[i].staffManagement();
-  storeLocation[i].staffManagementRendering();
-  inter2 += storeLocation[i].totalNumOfCookies;
 }
 
 //...(Rendering table 1 - the footer row)...
@@ -158,3 +155,8 @@ function totalPerHour () {
   }
 }
 totalPerHour();
+
+
+
+//Inputs: shopLocation, minNumOfCustomers, maxNumOfCustomers, avgNumOfCookies
+
