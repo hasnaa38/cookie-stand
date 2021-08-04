@@ -2,7 +2,14 @@ body {
     background-color: #F7F7E8;
     color: #33313B;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+    }
+
+/* 
+body {
+    background-color: #F7F7E8;
+    color: #33313B;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} */
 
 #firstLine {
     display: grid;
@@ -123,10 +130,10 @@ h3 {
     margin-left: 10px;
 }
 
-p.salesData {
-    font-size: medium;
-    margin-top: 60px;
-    margin-bottom: 10px;
+.staffManagement, .salesData {
+    text-align: justify;
+    font-size: 18px;
+    margin: 40px 0px 20px 5px;
 }
 
 #table1 td, th {
@@ -143,3 +150,23 @@ p.salesData {
 footer {
     height: 70px;
 }
+
+#addLocation {
+    display: grid;
+    width: 250px;
+    gap: 5px;
+}
+
+input:last-child {
+    /* margin-top: 15px; */
+    width: 86px;
+    position: relative;
+    bottom: -45px;
+
+}
+
+section {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
