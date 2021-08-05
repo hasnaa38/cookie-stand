@@ -159,6 +159,19 @@ function totalPerHour() {
 totalPerHour();
 
 //Event:
+let minValue = document.getElementById('minC');
+let maxValue = document.getElementById('maxC');
+
+function checkMaxBound () {
+  if( minValue >= maxValue ) {
+    maxValue.setCustomValidity('Max number of customers should be grater than min number of customers');
+  }
+}
+
+window.onload = function () {
+  document.getElementById('maxC').onchange = checkMaxBound;
+  document.getElementById('maxC').oninput = checkMaxBound;
+};
 
 addLocation.addEventListener('submit', submitListener);
 function submitListener(event) {
