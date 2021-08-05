@@ -4,7 +4,7 @@
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 let distribution = [0.5, 0.75, 1.0, 0.6, 0.8, 1.0, 0.7, 0.4, 0.6, 0.9, 0.7, 0.5, 0.3, 0.4, 0.6];
 function randomNumber(min, max) {
-  return(Math.floor(Math.random() * (max - min + 1) + min));
+  return (Math.floor(Math.random() * (max - min + 1) + min));
 }
 
 let addLocation = document.getElementById('addLocation');
@@ -13,39 +13,40 @@ console.log(addLocation);
 //Creating table elements and generating each table's first row:
 let salesProjections = document.getElementById('salesProjections');
 let tableElement = document.createElement('table');
-tableElement.setAttribute('id','table1');
+tableElement.setAttribute('id', 'table1');
 salesProjections.appendChild(tableElement);
 firstRow(tableElement);
 let staffManagementTable = document.getElementById('staffManagementTable');
 let table2Element = document.createElement('table');
-table2Element.setAttribute('id','table2');
+table2Element.setAttribute('id', 'table2');
 staffManagementTable.appendChild(table2Element);
 firstRow(table2Element);
 
 
 // Object constructor function:
-function SalesConstructor (shopLocation, minNumOfCustomers, maxNumOfCustomers, avgNumOfCookies) {
+function SalesConstructor(shopLocation, minNumOfCustomers, maxNumOfCustomers, avgNumOfCookies) {
   this.shopLocation = shopLocation;
   this.minNumOfCustomers = minNumOfCustomers; //per hour
   this.maxNumOfCustomers = maxNumOfCustomers; //per hour
   this.avgNumOfCookies = avgNumOfCookies; //per customer
-  this.noOfCustomers =[]; //per hour
+  this.noOfCustomers = []; //per hour
   this.noOfCookies = [];
   this.totalNumOfCookies = 0;
   this.noOfTossers = [];
 }
 
-SalesConstructor.prototype.salesData = function() {
-  for(let i=0; i<hours.length; i++) {
+SalesConstructor.prototype.salesData = function () {
+  for (let i = 0; i < hours.length; i++) {
     this.noOfCustomers.push(Math.ceil(randomNumber(this.minNumOfCustomers, this.maxNumOfCustomers) * distribution[i]));
     let randomGen = Math.ceil(this.noOfCustomers[i] * this.avgNumOfCookies);
     this.noOfCookies.push(randomGen);
     this.totalNumOfCookies += randomGen;
   }
-  return this.noOfCustomers, this.noOfCookies, this.totalNumOfCookies; };
+  return this.noOfCustomers, this.noOfCookies, this.totalNumOfCookies;
+};
 
 //...(Rendering object rows)...
-SalesConstructor.prototype.render = function() {
+SalesConstructor.prototype.render = function () {
   //To create a row for each store
   let trElement = document.createElement('tr');
   tableElement.appendChild(trElement);
@@ -54,7 +55,7 @@ SalesConstructor.prototype.render = function() {
   locationDataEl.textContent = this.shopLocation;
   trElement.appendChild(locationDataEl);
   //Full row contents: no. of cookies per hour
-  for (let j=0; j<this.noOfCookies.length; j++) {
+  for (let j = 0; j < this.noOfCookies.length; j++) {
     let salesDataEl = document.createElement('td');
     salesDataEl.textContent = this.noOfCookies[j];
     trElement.appendChild(salesDataEl);
@@ -66,12 +67,12 @@ SalesConstructor.prototype.render = function() {
 };
 
 //**Stretch goal** if number of customers<=40: 2 tossers(default), any 20 extra customers need a new tosser, the max number of customers ever is 65
-SalesConstructor.prototype.staffManagement = function() {
-  for(let m=0; m<hours.length; m++) {
-    if (this.noOfCustomers[m]<=40) {
+SalesConstructor.prototype.staffManagement = function () {
+  for (let m = 0; m < hours.length; m++) {
+    if (this.noOfCustomers[m] <= 40) {
       this.noOfTossers.push(2);
     }
-    else if (this.noOfCustomers[m]>40 && this.noOfCustomers<=60) {
+    else if (this.noOfCustomers[m] > 40 && this.noOfCustomers <= 60) {
       this.noOfTossers.push(3);
     }
     else {
@@ -87,7 +88,7 @@ SalesConstructor.prototype.staffManagementRendering = function () {
   let locationDataEl = document.createElement('td');
   locationDataEl.textContent = this.shopLocation;
   trElement.appendChild(locationDataEl);
-  for (let j=0; j<this.noOfCookies.length; j++) {
+  for (let j = 0; j < this.noOfCookies.length; j++) {
     let staffManage = document.createElement('td');
     staffManage.textContent = `${this.noOfCustomers[j]} customers, ${this.noOfTossers[j]} tossers`;
     trElement.appendChild(staffManage);
@@ -114,7 +115,7 @@ for (let i = 0; i < storeLocation.length; i++) {
 }
 
 //...(Rendering the first row for each table)...
-function firstRow (tableEl) {
+function firstRow(tableEl) {
   let trElement = document.createElement('tr');
   tableEl.appendChild(trElement);
   let header1El = document.createElement('th');
@@ -125,7 +126,7 @@ function firstRow (tableEl) {
     headerEl.textContent = hours[m];
     trElement.appendChild(headerEl);
   }
-  if(tableEl === tableElement) {
+  if (tableEl === tableElement) {
     let header2El = document.createElement('th');
     header2El.textContent = 'Total/day';
     trElement.appendChild(header2El);
@@ -134,14 +135,14 @@ function firstRow (tableEl) {
 
 //...(Rendering table 1 - the footer row)...
 
-function totalPerHour () {
+function totalPerHour() {
   let trElement = document.createElement('tr');
   tableElement.appendChild(trElement);
 
   let totals = ['Total/hr'];
   let inter = 0;
-  for (let i=0; i<hours.length; i++) {
-    for (let j=0; j<storeLocation.length; j++) {
+  for (let i = 0; i < hours.length; i++) {
+    for (let j = 0; j < storeLocation.length; j++) {
       inter += storeLocation[j].noOfCookies[i];
     }
     totals.push(inter);
@@ -149,7 +150,7 @@ function totalPerHour () {
   }
 
   totals.push(inter2);
-  for(let m=0; m<totals.length; m++){
+  for (let m = 0; m < totals.length; m++) {
     let footerEl = document.createElement('th');
     footerEl.textContent = totals[m];
     trElement.appendChild(footerEl);
@@ -158,6 +159,7 @@ function totalPerHour () {
 totalPerHour();
 
 //Event:
+
 addLocation.addEventListener('submit', submitListener);
 function submitListener(event) {
   event.preventDefault();
@@ -167,10 +169,10 @@ function submitListener(event) {
   let avgC = event.target.avgC.value;
 
   let newLocation = new SalesConstructor(newLoc, minC, maxC, avgC);
-  
-  removeFooter (); //To remove the last row (totals)
+
+  removeFooter(); //To remove the last row (totals)
   storeLocation.push(newLocation); //To add the new values to the totals
-  
+
   newLocation.salesData();
   newLocation.render();
   newLocation.staffManagement();
@@ -182,6 +184,6 @@ function submitListener(event) {
 }
 
 //Removing the last row from table 1 function:
-function removeFooter () {
+function removeFooter() {
   document.getElementById('table1').deleteRow(-1);
 }
